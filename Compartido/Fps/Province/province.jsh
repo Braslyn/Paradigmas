@@ -1,9 +1,9 @@
 import java.util.Collection.*;
 
 enum Gender{FEMALE, MALE}
-enum Provice{HEREDIA,SANJOSE,CARTAGO,PUNTARENAS,GUANACASTE,LIMON,ALAJUELA}
+enum Province{HEREDIA,SANJOSE,CARTAGO,PUNTARENAS,GUANACASTE,LIMON,ALAJUELA}
 
-record Person(String name, int age, Gender gender,Provice provice){
+record Person(String name, int age, Gender gender,Province province){
     int compareTo(Person p){
         return this.age() - p.age();
     }
@@ -20,36 +20,36 @@ List<Gender> genGenders(int max){
                           .collect(Collectors.toList());
 }
 
-Provice getProvice(int num){
+Province getProvince(int num){
 	switch(num%7){
 		case 0:
-			return Provice.LIMON;
+			return Province.LIMON;
 		case 1:
-			return Provice.SANJOSE;
+			return Province.SANJOSE;
 		case 2:
-			return Provice.ALAJUELA;
+			return Province.ALAJUELA;
 		case 3:
-			return Provice.CARTAGO;
+			return Province.CARTAGO;
 		case 4:
-			return Provice.HEREDIA;
+			return Province.HEREDIA;
 		case 5:
-			return Provice.PUNTARENAS;
+			return Province.PUNTARENAS;
 		case 6:
-			return Provice.GUANACASTE;
+			return Province.GUANACASTE;
 	}
-	return  Provice.HEREDIA;
+	return  Province.HEREDIA;
 }
-List<Provice> genProvice(int max){
-	return rand.ints().limit(max).boxed().map(x->getProvice(x)).collect(Collectors.toList());
+List<Province> genProvince(int max){
+	return rand.ints().limit(max).boxed().map(x->getProvince(x)).collect(Collectors.toList());
 }
 
 List<Person> genPersons() throws Exception{
     var names = Files.lines(Paths.get("names.txt")).collect(Collectors.toList());
     var ages = genAges(18, 90, names.size());
     var genders = genGenders(names.size());
-	var provice= genProvice(names.size());
+	var province= genProvince(names.size());
     return IntStream.range(0, names.size()).boxed()
-           .map( i -> new Person(names.get(i), ages.get(i), genders.get(i),provice.get(i))) 
+           .map( i -> new Person(names.get(i), ages.get(i), genders.get(i),province.get(i))) 
            .collect(Collectors.toList());
 }
 
@@ -58,7 +58,12 @@ int ageMargin(List<Person> persons, Gender gender){
 	collect( Collectors.teeing( Collectors.maxBy(Person::compareTo) , Collectors.minBy(Person::compareTo),
 	(e1,e2) -> e1.get().age()-e2.get().age() ) );
 }
- 
+
+Map<Province, Map<Gender,List<Person>>> byProvinceAndGender(List<Person> persons){
+	return persons.stream().collect(Collectors.groupingBy(Person::province,Collectors.groupingBy(Person::gender)));
+}
 var list = genPersons()
  
-println("Diferencia de edad - > "+Gender.MALE+"-> "+ ageMargin(list ,Gender.MALE ) )
+
+
+
