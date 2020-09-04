@@ -1,0 +1,2 @@
+*** Testing Fibo(4) 40 times ***
+Ellapsed(sum=1134903149) 0s

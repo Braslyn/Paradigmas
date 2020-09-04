@@ -1,0 +1,175 @@
+Compiled from "Foo.java"
+public class Foo {
+  public Foo();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: sipush        666
+       3: istore_1
+       4: sipush        999
+       7: istore_2
+       8: iload_1
+       9: iload_2
+      10: iadd
+      11: iconst_1
+      12: iadd
+      13: istore_3
+      14: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+      17: iload_3
+      18: invokevirtual #13                 // Method java/io/PrintStream.println:(I)V
+      21: ldc           #19                 // String Un mensaje
+      23: astore        4
+      25: ldc           #19                 // String Un mensaje
+      27: astore        5
+      29: new           #21                 // class Foo
+      32: dup
+      33: invokespecial #23                 // Method "<init>":()V
+      36: astore        6
+      38: iconst_5
+      39: istore        7
+      41: aload         6
+      43: iload         7
+      45: invokevirtual #24                 // Method fact_for:(I)I
+      48: pop
+      49: aload         6
+      51: iload         7
+      53: invokevirtual #28                 // Method fact_while:(I)I
+      56: pop
+      57: aload         6
+      59: iload         7
+      61: invokevirtual #31                 // Method fact_fp:(I)I
+      64: pop
+      65: aload         6
+      67: iload         7
+      69: invokevirtual #34                 // Method fact_rec:(I)I
+      72: pop
+      73: return
+
+  public int fact_rec1(int);
+    Code:
+       0: iload_1
+       1: ifne          6
+       4: iconst_1
+       5: ireturn
+       6: iload_1
+       7: aload_0
+       8: iload_1
+       9: iconst_1
+      10: isub
+      11: invokevirtual #34                 // Method fact_rec:(I)I
+      14: imul
+      15: ireturn
+
+  public int fact_rec(int);
+    Code:
+       0: iload_1
+       1: ifne          8
+       4: iconst_1
+       5: goto          17
+       8: iload_1
+       9: aload_0
+      10: iload_1
+      11: iconst_1
+      12: isub
+      13: invokevirtual #34                 // Method fact_rec:(I)I
+      16: imul
+      17: ireturn
+
+  public int fact_fp(int);
+    Code:
+       0: iconst_1
+       1: iload_1
+       2: invokestatic  #37                 // InterfaceMethod java/util/stream/IntStream.rangeClosed:(II)Ljava/util/stream/IntStream;
+       5: iconst_1
+       6: invokedynamic #43,  0             // InvokeDynamic #0:applyAsInt:()Ljava/util/function/IntBinaryOperator;
+      11: invokeinterface #47,  3           // InterfaceMethod java/util/stream/IntStream.reduce:(ILjava/util/function/IntBinaryOperator;)I
+      16: ireturn
+
+  public int fact_for(int);
+    Code:
+       0: iconst_1
+       1: istore_2
+       2: iconst_2
+       3: istore_3
+       4: iload_3
+       5: iload_1
+       6: if_icmpgt     19
+       9: iload_2
+      10: iload_3
+      11: imul
+      12: istore_2
+      13: iinc          3, 1
+      16: goto          4
+      19: iload_2
+      20: ireturn
+
+  public int fact_while(int);
+    Code:
+       0: iconst_1
+       1: istore_2
+       2: iconst_2
+       3: istore_3
+       4: iload_3
+       5: iload_1
+       6: if_icmpgt     19
+       9: iload_2
+      10: iload_3
+      11: imul
+      12: istore_2
+      13: iinc          3, 1
+      16: goto          4
+      19: iload_2
+      20: ireturn
+
+  public java.lang.String foo(int);
+    Code:
+       0: ldc           #51                 // String S0
+       2: astore_2
+       3: iload_1
+       4: lookupswitch  { // 5
+                     2: 56
+                     4: 62
+                     5: 62
+                    10: 56
+                    30: 62
+               default: 68
+          }
+      56: ldc           #53                 // String s12
+      58: astore_2
+      59: goto          71
+      62: ldc           #55                 // String s345
+      64: astore_2
+      65: goto          71
+      68: ldc           #57                 // String Sn
+      70: astore_2
+      71: aload_2
+      72: areturn
+
+  public java.lang.String goo(int);
+    Code:
+       0: ldc           #51                 // String S0
+       2: astore_2
+       3: iload_1
+       4: tableswitch   { // 1 to 5
+                     1: 40
+                     2: 40
+                     3: 46
+                     4: 46
+                     5: 46
+               default: 52
+          }
+      40: ldc           #53                 // String s12
+      42: astore_2
+      43: goto          55
+      46: ldc           #55                 // String s345
+      48: astore_2
+      49: goto          55
+      52: ldc           #57                 // String Sn
+      54: astore_2
+      55: aload_2
+      56: areturn
+}

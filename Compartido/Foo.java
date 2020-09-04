@@ -24,16 +24,10 @@ public class Foo{
         me.fact_fp(nf);
         me.fact_rec(nf);  
     }
-	
-    public int fact_rec1(int n){
-		if(n==0)
-			return 1;
-        return  n * fact_rec( n - 1);
-    }
+    
     public int fact_rec(int n){
         return n == 0 ? 1 : n * fact_rec( n - 1);
     }
-	
     public int fact_fp(int n){
         return IntStream.rangeClosed(1, n)
                         .reduce(1, (f, i) -> f * i);
@@ -53,30 +47,4 @@ public class Foo{
         }
         return f;
     }
-	public String foo(int n){
-		String s="S0";
-		switch(n){
-			case 10:
-			case 2: s="s12";break;
-			case 30,4,5:s="s345";break;
-			default:s="Sn";
-		}
-		return s;
-	}
-	public String goo(int n){
-		String s="S0";
-		switch(n){
-			case 1:
-			case 2: s="s12";break;
-			case 3,4,5:s="s345";break;
-			default:s="Sn";
-		}
-		return s;
-	}
-	public int hoo(int x ,int y,int z){
-		for(int i=z;x>0;x--){
-			i=i*y;
-		}
-		return y;
-	}
 }
