@@ -16,5 +16,3 @@ module.exports={
 	nats,nats_gen
 }
 
-xd = nats_gen(0,10)
-
