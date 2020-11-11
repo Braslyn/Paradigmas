@@ -17,11 +17,18 @@ penultimo(X,[X,_]).
 penultimo(X,[_|R]):- penultimo(X,R).
 
 
+non_adjacent(L,X,Y):- append(_,[X,_|_],A),append(A,[Y|_],L).
 
-
-non_adjacent([F,R],X,Y):- append([F],X,R), non_adjacent(R,X,Y).
-
+%equi_distant([F|R], N, X, Y):- append([X|_],[_|Y],[F|R]).
 
 last(L,U):- foldl([X,_,M] >> (M = X), L,_,U).
 
-occurs(L,V,N):- foldl([X,Y,Acc] >> ( X\==V -> Acc is Y ;X==V -> Acc is Y+1 ) , L , 0 , N).%mal pero casi bien
+occurs(L,V,N):- foldl({V}/[X,Y,Acc] >> ( X\==V -> Acc is Y ;X==V -> Acc is Y+1 ) , L , 0 , N).%mal pero casi bien
+
+%reduce(Lambda,L,V0,V):-
+
+reduce(_,[],V0,V0).
+reduce(Lambda,[F|L],V0,V):- call(Lambda,F,V0,Acc),reduce(Lambda,L,Acc,V).
+
+map(_,[],[]).
+map(Lambda,[F|L],[C|S]):- call(Lambda,F,C), map(Lambda,L,S).
